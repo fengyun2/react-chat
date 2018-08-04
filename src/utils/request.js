@@ -1,11 +1,10 @@
 import axios from 'axios';
 import querystring from 'querystring';
-import { Message } from 'element-ui';
+// import Message from '../components/basic/Message'
 import { BASE_API } from '@/config';
 
 //设置默认请求头
-axios.defaults.headers.common['Content-Type'] =
-  'application/x-www-form-urlencoded';
+axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
 // 发送请求前处理request的数据
 // axios.defaults.transformRequest = [
 //   function(data) {
