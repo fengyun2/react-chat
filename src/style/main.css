@@ -92,12 +92,10 @@ body:hover {
   display: none !important;
 }
 
-.app {
-  & > .blur {
-    filter: blur(10px);
-  }
-  & > .child {
-    border-radius: 10px;
-    box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.5);
-  }
+.app .blur {
+  filter: blur(10px);
+}
+.app .child {
+  border-radius: 10px;
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.5);
 }

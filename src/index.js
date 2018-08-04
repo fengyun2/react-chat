@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './styles.css';
-import './style/main.scss';
+import './style/main.css';
 
 function App() {
   return (
