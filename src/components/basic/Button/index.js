@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import '../components.css';
+
 class Button extends PureComponent {
   static propTypes = {
     onClick: PropTypes.func,

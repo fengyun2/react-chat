@@ -1,2 +1,41 @@
 .main-login {
+  border-bottom: none;
+}
+.main-login .pane {
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+}
+.main-login .pane h3 {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 27px;
+  margin-top: 20px;
+  color: #666;
+}
+.main-login .pane button {
+  background-color: var(--primary-color-10);
+  color: var(--primary-text-color-10);
+  height: 40px;
+  border: none;
+  margin-top: 30px;
+  transition: background-color 0.2s;
+  border-radius: 6px;
+}
+.main-login .pane button:hover {
+  background-color: var(--primary-color-9);
+}
+.main-login .pane .component-input {
+  height: 40px;
+}
+.main-login .rc-tabs-nav-wrap {
+  width: 166px;
+  margin: 0 auto;
+}
+.main-login .rc-tabs-tab {
+  font-size: 16px;
+}
+.rc-dialog {
+  width: 450px;
 }

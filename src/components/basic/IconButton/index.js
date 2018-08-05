@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from '../Button';
 
+import '../components.css';
+
 class IconButton extends Button {
   render() {
     const { width, height, icon, iconSize, onClick, style } = this.props;

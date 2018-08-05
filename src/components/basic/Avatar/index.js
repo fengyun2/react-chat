@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../components.css';
+
 const avatarFallback = 'https://cdn.suisuijiang.com/fiora/avatar/0.jpg';
 const failTimes = new Map();
 

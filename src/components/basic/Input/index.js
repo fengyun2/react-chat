@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import IconButton from '../IconButton';
 
+import '../components.css';
+
 class Input extends Component {
   static propTypes = {
     type: PropTypes.string,

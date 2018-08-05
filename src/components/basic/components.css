@@ -1,0 +1,112 @@
+.component-button {
+  border: none;
+  background-color: var(--primary-color-8_5);
+  color: var(--primary-text-color-10);
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.4s;
+}
+.component-button:hover {
+  background-color: var(--primary-color-10);
+}
+.component-button.danger {
+  background-color: #dd514c;
+}
+.component-button.danger:hover {
+  background-color: #d7342e;
+}
+.rc-dialog {
+  top: 45% !important;
+  transform: translateY(-50%) !important;
+}
+.rc-dialog-title {
+  font-size: 16px !important;
+}
+.rc-dialog-wrap {
+  overflow: hidden !important;
+}
+.rc-dialog-close {
+  top: 0 !important;
+  right: 10px !important;
+}
+.rc-dialog-close .rc-dialog-close-x {
+  font-size: 32px !important;
+}
+.component-iconButton {
+  text-align: center;
+  color: #a5b5c0;
+  cursor: pointer;
+}
+.component-iconButton:hover {
+  color: #f7f7f7;
+}
+.component-input {
+  position: relative;
+}
+.component-input input {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0 34px 0 8px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+}
+.component-input input:focus {
+  border-color: var(--primary-color-10);
+}
+.component-input .component-iconButton {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 5px;
+}
+.component-input .component-iconButton:hover {
+  color: var(--primary-color-10);
+}
+.rc-select-dropdown {
+  z-index: 1500 !important;
+}
+.rc-notification {
+  top: 5px !important;
+  z-index: 1100 !important;
+}
+.rc-notification-notice {
+  height: 50px !important;
+}
+.component-message {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 1px;
+}
+.component-message .iconfont {
+  font-size: 22px;
+}
+.component-message .iconfont.icon-success {
+  color: green;
+}
+.component-message .iconfont.icon-error {
+  color: #d82e2e;
+}
+.component-message .iconfont.icon-warning {
+  color: orange;
+}
+.component-message .iconfont.icon-info {
+  color: #2773ef;
+}
+.component-message > span {
+  margin-left: 8px;
+  font-size: 16px;
+}
+.rc-tooltip {
+  display: inline-block !important;
+}
+.rc-tooltip-hidden {
+  display: none !important;
+}
+.rc-tooltip-inner span {
+  color: #f1f1f1 !important;
+}

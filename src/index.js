@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import platform from 'platform';
 
 import notification from './utils/notification';
 import App from './App';
+import store from './store/store';
 
 import 'normalize.css';
 import './styles.css';
@@ -26,4 +28,9 @@ if (windowStatus === 'blur') {
 // }
 
 const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  rootElement
+);

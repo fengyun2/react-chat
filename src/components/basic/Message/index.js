@@ -2,6 +2,7 @@ import React from 'react';
 import Notification from 'rc-notification';
 
 import 'rc-notification/assets/index.css';
+import '../components.css';
 
 function showMessage(text, duration = 1.5, type = 'success') {
   Notification.newInstance({}, notification => {

@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import Dialog from './components/basic/Dialog/index';
 import Login from './containers/Login/index';
 
-console.log('Login: ', Login);
-
 class App extends Component {
   static propTypes = {
     showLoginDialog: PropTypes.bool,
