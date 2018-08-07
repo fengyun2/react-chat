@@ -8,8 +8,7 @@ import App from './App';
 import store from './store/store';
 
 import 'normalize.css';
-import './styles.css';
-import './style/main.css';
+import './style/main.less';
 
 let windowStatus = 'focus';
 window.onfocus = () => (windowStatus = 'focus');
