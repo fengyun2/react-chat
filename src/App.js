@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import action from './store/action';
 import Dialog from './components/basic/Dialog/index';
 import Login from './containers/Login/index';
+import Index from './containers/Index/index';
 
 class App extends Component {
   static propTypes = {
@@ -80,11 +83,13 @@ class App extends Component {
   }
 
   render() {
-    const { showLoginDialog = true } = this.props;
+    const { showLoginDialog } = this.props;
     return (
       <div className="app" style={this.style}>
         <div className="blur" style={this.blurStyle} />
-        <div className="child" style={this.childStyle} />
+        <div className="child" style={this.childStyle}>
+          <Index />
+        </div>
         <Dialog visible={showLoginDialog} closable={false} onClose={() => {}}>
           <Login />
         </Dialog>
@@ -93,4 +98,9 @@ class App extends Component {
   }
 }
 
-export default App;
+// export default App;
+
+export default connect(state => ({
+  showLoginDialog: state.getIn(['ui', 'showLoginDialog']),
+  backgroundImage: state.getIn(['ui', 'backgroundImage'])
+}))(App);

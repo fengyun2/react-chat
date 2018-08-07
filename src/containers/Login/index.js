@@ -5,6 +5,8 @@ import { Tabs, TabPane, TabContent, ScrollableInkTabBar } from '../../components
 import Input from '../../components/basic/Input';
 import Message from '../../components/basic/Message';
 
+import action from '../../store/action';
+
 import './login.css';
 
 class Login extends Component {
@@ -17,6 +19,27 @@ class Login extends Component {
       environment: platform.description
     };
     console.log(loginInfo);
+    const user = {
+      _id: '123456',
+      isAdmin: true,
+      username: loginInfo.username,
+      avatar: '',
+      groups: [],
+      friends: [
+        {
+          _id: '123456',
+          to: { avatar: '' },
+          isAdmin: false,
+          username: '舒畅',
+          groups: [],
+          friends: []
+        }
+      ]
+    };
+    action.setUser(user);
+    action.closeLoginDialog();
+    window.localStorage.setItem('token', '123');
+    Message.success('登录成功');
   };
   handleRegister = () => {
     const registerInfo = {
@@ -27,6 +50,27 @@ class Login extends Component {
       environment: platform.description
     };
     console.log(registerInfo);
+    const user = {
+      _id: '123456',
+      isAdmin: true,
+      username: '刘亦菲',
+      avatar: '',
+      groups: [],
+      friends: [
+        {
+          _id: '123456',
+          to: { avatar: '' },
+          isAdmin: false,
+          username: '舒畅',
+          groups: [],
+          friends: []
+        }
+      ]
+    };
+    Message.success('创建成功');
+    action.setUser(user);
+    action.closeLoginDialog();
+    window.localStorage.setItem('token', '123');
   };
   renderLogin() {
     return (

@@ -1,8 +1,12 @@
 {
   "name": "react-chat",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "One Chat WebApp",
+  "keywords": [
+    "redux",
+    "react",
+    "chat"
+  ],
   "main": "src/index.js",
   "dependencies": {
     "axios": "0.18.0",
@@ -26,6 +30,7 @@
     "react-color": "2.14.1",
     "react-copy-to-clipboard": "5.0.1",
     "react-dom": "16.3.2",
+    "react-immutable-proptypes": "2.1.0",
     "react-immutable-render-mixin": "0.9.7",
     "react-loading": "2.0.3",
     "react-radio-buttons": "1.2.2",
