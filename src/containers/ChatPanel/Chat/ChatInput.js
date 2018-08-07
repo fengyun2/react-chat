@@ -117,7 +117,7 @@ class ChatInput extends Component {
       return;
     }
     // TODO
-    const id = this.addSelfMessage('text', xxs(message));
+    const id = this.addSelfMessage('text', xss(message));
     this.sendMessage(id, 'text', message);
   };
   async sendMessage(localId, type, content) {
