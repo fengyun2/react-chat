@@ -1,0 +1,128 @@
+.module-main-feature {
+  width: 300px;
+  height: 100%;
+  background-color: var(--primary-color-5);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatPanel-feature {
+  display: flex;
+  height: 70px;
+  align-items: center;
+  padding: 0 12px;
+  position: relative;
+}
+.chatPanel-feature > input {
+  flex: 1;
+  height: 36px;
+  border-radius: 18px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding-left: 35px;
+  padding-right: 15px;
+  padding-top: 2px;
+  font-size: 14px;
+  color: #333;
+}
+.chatPanel-feature > input.focus {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.chatPanel-feature > .iconfont {
+  font-size: 22px;
+  position: absolute;
+  left: 20px;
+  top: 22px;
+  color: #666;
+}
+.chatPanel-feature > div {
+  margin-left: 5px;
+}
+.chatPanel-feature > div .iconfont {
+  color: rgba(255, 255, 255, 0.5);
+}
+.chatPanel-feature > div:hover .iconfont {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.search-result {
+  position: absolute;
+  top: 60px;
+  left: 8px;
+  width: 276px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  z-index: 1300;
+}
+.search-result .rc-tabs-tab {
+  margin-right: 20px;
+}
+.search-result .rc-tabs-nav {
+  margin-left: 16px !important;
+}
+.search-result .user-list > div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 56px;
+  padding-left: 8px;
+}
+.search-result .user-list > div > p {
+  color: #333;
+  margin-left: 10px;
+}
+.search-result .user-list > div:hover {
+  background-color: #eee;
+}
+.search-result .group-list > div {
+  display: flex;
+  padding-left: 8px;
+  cursor: pointer;
+  height: 56px;
+  align-items: center;
+}
+.search-result .group-list > div > div {
+  margin-left: 10px;
+}
+.search-result .group-list > div > div > p {
+  color: #333;
+}
+.search-result .group-list > div > div > p:last-child {
+  color: #666;
+  font-size: 14px;
+}
+.search-result .group-list > div:hover {
+  background-color: #eee;
+}
+.search-result .all-list {
+  padding: 8px 12px;
+  max-height: 440px;
+}
+.search-result .all-list > div > p {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  line-height: 31px;
+}
+.search-result .none {
+  font-size: 14px;
+  line-height: 80px;
+  text-align: center;
+  color: #333;
+}
+.search-result .more {
+  color: var(--primary-color-10);
+  font-size: 12px;
+  text-align: center;
+}
+.search-result .more > span {
+  cursor: pointer;
+}
+.search-result .only {
+  padding: 6px 12px;
+  max-height: 440px;
+  overflow-y: auto;
+}

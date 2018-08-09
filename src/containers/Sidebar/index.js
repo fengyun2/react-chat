@@ -18,6 +18,8 @@ import Input from '../../components/basic/Input';
 import setCssVariable from '../../utils/setCssVariable';
 import config from '../../config';
 
+import './index.css';
+
 class Sidebar extends Component {
   static logout() {
     window.localStorage.removeItem('token');

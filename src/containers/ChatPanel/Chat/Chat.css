@@ -1,0 +1,76 @@
+.module-main-chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(241, 241, 241, 0.6);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.chat-headerBar {
+  height: 70px;
+  border-bottom: 1px solid rgba(208, 208, 208, 0.6);
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  justify-content: space-between;
+}
+.chat-headerBar > h2 {
+  font-size: 16px;
+  color: #333;
+}
+.chat-headerBar > div {
+  display: flex;
+}
+.chat-headerBar .iconfont {
+  color: var(--primary-color-10);
+}
+.chat-headerBar .iconfont:hover {
+  color: var(--primary-color-8);
+}
+.chat-messageList {
+  flex: 1;
+  padding: 8px 10px 0 10px;
+  overflow: auto;
+}
+.chat-chatInput {
+  height: 70px;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom-right-radius: 10px;
+}
+.chat-chatInput input {
+  flex: 1;
+  margin: 0 10px;
+  padding: 0 8px;
+  height: 32px;
+  outline: none;
+  border: 1px solid rgba(208, 208, 208, 0.5);
+  font-size: 14px;
+  color: #666;
+}
+.chat-chatInput input::placeholder {
+  color: #999;
+}
+.chat-chatInput div .iconfont {
+  color: #aaa;
+}
+.chat-chatInput div:hover .iconfont {
+  color: var(--primary-color-10);
+}
+.chat-chatInput.guest > p {
+  color: #333;
+  user-select: none;
+  font-size: 14px;
+  flex: 1;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.chat-chatInput.guest > p > b {
+  color: var(--primary-color-10);
+  cursor: pointer;
+  font-size: 16px;
+}

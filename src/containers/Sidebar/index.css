@@ -1,0 +1,56 @@
+.module-main-sidebar {
+  width: 80px;
+  background-color: var(--primary-color-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.module-main-sidebar .avatar {
+  margin-top: 50px;
+  cursor: pointer;
+}
+.status {
+  position: absolute;
+  top: 96px;
+  left: 48px;
+}
+.tabs {
+  margin-top: 50px;
+}
+.buttons {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.buttons .iconfont {
+  color: var(--primary-text-color-7);
+  transition: color 0.2s;
+}
+.buttons > div,
+.buttons > a {
+  margin-top: 10px;
+}
+.buttons > div:hover .iconfont,
+.buttons > a:hover .iconfont {
+  color: var(--primary-text-color-10);
+}
+.buttons > p {
+  writing-mode: vertical-lr;
+  color: var(--primary-text-color-8);
+  font-size: 18px;
+  letter-spacing: 6px;
+  cursor: default;
+}
+.buttons > i {
+  font-size: 22px;
+  color: var(--primary-text-color) !important;
+  transition: translate(-2px, 5px);
+}
+.buttons > a {
+  text-decoration: none;
+}
