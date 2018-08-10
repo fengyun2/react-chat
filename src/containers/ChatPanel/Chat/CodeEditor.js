@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Select, Option } from '../../../components/basic/Select';
@@ -27,7 +27,7 @@ let editorLoadEnd = false;
 const langLoadEnd = {};
 
 function createLanguage(lang, loadFun) {
-  return class AceEditorWrap extends PureComponent {
+  return class AceEditorWrap extends Component {
     constructor(...args) {
       super(...args);
       this.state = {
@@ -38,7 +38,7 @@ function createLanguage(lang, loadFun) {
     componentDidMount() {
       const { editorReady, modeReady } = this.state;
       if (!editorReady) {
-        // 异步加载编辑器
+        // Dynamic loading code editor
         require.ensure(
           [],
           require => {
@@ -46,7 +46,7 @@ function createLanguage(lang, loadFun) {
             require('brace/theme/tomorrow');
             require('brace/ext/language_tools');
             this.setState({ editorReady: true });
-            loadFun && loadFun.call(this);
+            loadFun.call(this);
             langLoadEnd[lang] = true;
           },
           'react-ace'
@@ -57,13 +57,12 @@ function createLanguage(lang, loadFun) {
         langLoadEnd[lang] = true;
       }
     }
-
     render() {
       const { editorReady, modeReady } = this.state;
       if (!editorReady || !modeReady) {
         return (
           <span tip="loading...">
-            <div className="loading" />
+            <div className="loadinng" />
           </span>
         );
       }
@@ -86,22 +85,148 @@ function firstUpperCase(str) {
   return str.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase());
 }
 
-let languageTypes = languages.map(language => firstUpperCase(language));
+const Javascript = createLanguage('javascript', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/javascript');
+      this.setState({ modeReady: true });
+    },
+    'javascript.mode'
+  );
+});
+const Typescript = createLanguage('typescript', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/typescript');
+      this.setState({ modeReady: true });
+    },
+    'typescript.mode'
+  );
+});
+const Java = createLanguage('java', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/java');
+      this.setState({ modeReady: true });
+    },
+    'java.mode'
+  );
+});
+const Cpp = createLanguage('c_cpp', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/c_cpp');
+      this.setState({ modeReady: true });
+    },
+    'cpp.mode'
+  );
+});
+const Python = createLanguage('python', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/python');
+      this.setState({ modeReady: true });
+    },
+    'python.mode'
+  );
+});
+const Ruby = createLanguage('ruby', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/ruby');
+      this.setState({ modeReady: true });
+    },
+    'ruby.mode'
+  );
+});
+const Php = createLanguage('php', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/php');
+      this.setState({ modeReady: true });
+    },
+    'php.mode'
+  );
+});
+const Golang = createLanguage('golang', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/golang');
+      this.setState({ modeReady: true });
+    },
+    'golang.mode'
+  );
+});
+const Csharp = createLanguage('csharp', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/csharp');
+      this.setState({ modeReady: true });
+    },
+    'csharp.mode'
+  );
+});
+const Html = createLanguage('html', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/html');
+      this.setState({ modeReady: true });
+    },
+    'html.mode'
+  );
+});
+const Css = createLanguage('css', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/css');
+      this.setState({ modeReady: true });
+    },
+    'css.mode'
+  );
+});
+const Markdown = createLanguage('markdown', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/markdown');
+      this.setState({ modeReady: true });
+    },
+    'markdown.mode'
+  );
+});
+const Sql = createLanguage('sql', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/sql');
+      this.setState({ modeReady: true });
+    },
+    'sql.mode'
+  );
+});
+const Json = createLanguage('json', function() {
+  require.ensure(
+    [],
+    require => {
+      require('brace/mode/json');
+      this.setState({ modeReady: true });
+    },
+    'json.mode'
+  );
+});
 
-[...languageTypes] = languages.map(language =>
-  createLanguage(language, function() {
-    require.ensure(
-      [],
-      require => {
-        require(`brace/mode/${language}`);
-        this.setState({ modeReady: true });
-      },
-      `${language}.mode`
-    );
-  })
-);
-
-class CodeEditor extends PureComponent {
+class CodeEditor extends Component {
   static propTypes = {
     onSend: PropTypes.func
   };

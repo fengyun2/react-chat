@@ -222,7 +222,16 @@ class ChatInput extends Component {
     </div>
   );
 
-  featureDropdown = <div className="feature-dropdown" />;
+  featureDropdown = (
+    <div className="feature-dropdown">
+      <Menu onClick={this.handleFeatureMenuClick}>
+        <MenuItem key="expression">发送表情包</MenuItem>
+        <MenuItem key="huaji">发送滑稽</MenuItem>
+        <MenuItem key="image">发送图片</MenuItem>
+        <MenuItem key="code">发送代码</MenuItem>
+      </Menu>
+    </div>
+  );
 
   render() {
     const {
