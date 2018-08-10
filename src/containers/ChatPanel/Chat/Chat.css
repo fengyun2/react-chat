@@ -8,6 +8,8 @@
   overflow: hidden;
   position: relative;
 }
+
+/* chat-headerBar start */
 .chat-headerBar {
   height: 70px;
   border-bottom: 1px solid rgba(208, 208, 208, 0.6);
@@ -29,11 +31,15 @@
 .chat-headerBar .iconfont:hover {
   color: var(--primary-color-8);
 }
+/* chat-headerBar end */
+
 .chat-messageList {
   flex: 1;
   padding: 8px 10px 0 10px;
   overflow: auto;
 }
+
+/* chat-chatInput start */
 .chat-chatInput {
   height: 70px;
   background-color: rgba(255, 255, 255, 0.5);
@@ -73,4 +79,178 @@
   color: var(--primary-color-10);
   cursor: pointer;
   font-size: 16px;
+}
+/* chat-chatInput end */
+
+/* chat-expression start */
+.chat-expression {
+  height: 100%;
+}
+.chat-expression .default-expression {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.chat-expression .default-expression > div {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  transition: all 0.3s;
+}
+.chat-expression .default-expression > div:hover {
+  background-color: #e9e9e9;
+  cursor: pointer;
+}
+.chat-expression .default-expression > div > div {
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-size: 30px auto;
+  background-image: url('../../../../assets/images/baidu.png');
+}
+.chat-expression .rc-tabs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chat-expression .rc-tabs-content {
+  flex: 1;
+}
+
+/* chat-expression end */
+
+.expression-dropdown {
+  width: 415px;
+  height: 240px;
+  background-color: white;
+  transform: translateY(-8px);
+}
+
+.feature-dropdown {
+  background-color: white;
+}
+.feature-dropdown .rc-menu {
+  padding: 6px 0;
+}
+.feature-dropdown .rc-menu-item {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.chat-codeEditor {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.chat-codeEditor .select-container {
+  display: flex;
+  align-items: center;
+}
+.chat-codeEditor .select-container .language-select {
+  width: 150px;
+  margin-left: 10px;
+}
+.chat-codeEditor .select-container > h3 {
+  font-size: 14px;
+  font-weight: normal;
+  color: #666;
+}
+.chat-codeEditor .editor-container {
+  flex: 1;
+  margin-top: 10px;
+}
+
+.codeEditor-dialog {
+  width: 600px !important;
+}
+.codeEditor-dialog .container {
+  display: flex;
+  flex-direction: column;
+}
+.codeEditor-dialog .codeEditor-button {
+  width: 100px;
+  height: 36px;
+  border-radius: 4px;
+  margin-top: 10px;
+  align-self: flex-end;
+  background-color: var(--primary-color-10);
+  color: var(--primary-text-color-10);
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.codeEditor-dialog .codeEditor-button:hover {
+  background-color: var(--primary-color-9);
+}
+
+.expressionSearch-dialog {
+  width: 600px !important;
+}
+.expressionSearch-dialog .container {
+  display: flex;
+  flex-direction: column;
+}
+.expressionSearch-dialog .container > div {
+  display: flex;
+}
+.expressionSearch-dialog .container > div.input-container .component-input {
+  flex: 1;
+  height: 40px;
+}
+.expressionSearch-dialog .container > div.input-container .component-button {
+  width: 80px;
+  margin-left: 12px;
+}
+.expressionSearch-dialog .container > div.loading {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 18px;
+}
+.expressionSearch-dialog .container > div.expression-list {
+  flex-wrap: wrap;
+  margin-top: 16px;
+  overflow: auto;
+  max-height: 560px;
+}
+.expressionSearch-dialog .container > div.expression-list > img {
+  width: 130px;
+  height: auto;
+  max-height: 130px;
+  margin: 5px;
+  cursor: pointer;
+}
+.expressionSearch-dialog .container > div.expression-list > img:hover {
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.15);
+}
+
+.react-viewer-toolbar {
+  height: 38px !important;
+}
+
+.react-viewer-btn {
+  width: 38px !important;
+  height: 38px !important;
+}
+.react-viewer-btn:nth-child(3),
+.react-viewer-btn:nth-child(5) {
+  display: none;
+}
+.react-viewer-btn > .react-viewer-icon {
+  line-height: 38px;
+  font-size: 16px;
+}
+.react-viewer-close {
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 0 0 0 80px;
+}
+.react-viewer-close .react-viewer-icon {
+  top: 14px;
+  left: 36px;
+  font-size: 20px;
+}
+.react-viewer-attribute {
+  margin-bottom: 12px;
 }

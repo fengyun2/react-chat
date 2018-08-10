@@ -7,6 +7,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import action from '../../../store/action';
 import config from '../../../config';
 import xss from '../../../utils/xss';
+import Url from '../../../utils/url';
 import IconButton from '../../../components/basic/IconButton';
 import Dropdown from '../../../components/basic/Dropdown';
 import { Menu, MenuItem } from '../../../components/basic/Menu';
@@ -15,6 +16,10 @@ import Message from '../../../components/basic/Message';
 import Input from '../../../components/basic/Input';
 import Button from '../../../components/basic/Button';
 import Loading from '../../../components/basic/Loading';
+
+import Expression from './Expression';
+import CodeEditor from './CodeEditor';
+import readDiskFile from '../../../utils/readDiskFile';
 
 class ChatInput extends Component {
   static handleLogin() {
@@ -78,6 +83,36 @@ class ChatInput extends Component {
       expressionVisible: visible
     });
   };
+  handleFeatureMenuClick = ({ key }) => {
+    switch (key) {
+      case 'image': {
+        this.handleSelectFile();
+        break;
+      }
+      case 'huaji': {
+        break;
+      }
+      case 'code': {
+        this.setState({
+          codeInputVisible: true
+        });
+        break;
+      }
+      case 'expression': {
+        this.setState({
+          expressionSearchVisible: true
+        });
+        break;
+      }
+      default: {
+      }
+    }
+  };
+  handleCodeEditorClose = () => {
+    this.setState({
+      codeInputVisible: false
+    });
+  };
   closeExpressionSearch = () => {
     this.setState({
       expressionSearchVisible: false
@@ -107,6 +142,16 @@ class ChatInput extends Component {
     if (!this.props.connect) {
       return Message.error('发送消息失败，您当前处于离线状态');
     }
+    const language = this.codeEditor.getLanguage();
+    const rawCode = this.codeEditor.getValue();
+    if (rawCode === '') {
+      return Message.warning('请输入内容');
+    }
+
+    const code = `@language=${language}@${rawCode}`;
+    const id = this.addSelfMessage('code', code);
+    this.sendMessage(id, 'code', code);
+    this.handleCodeEditorClose();
   };
   sendTextMessage = () => {
     if (!this.props.connect) {
@@ -124,6 +169,60 @@ class ChatInput extends Component {
     const { focus } = this.props;
     Message.success('发送消息成功');
   }
+  handleSelectExpression = expression => {
+    this.handleVisibleChange(false);
+    ChatInput.insertAtCursor(this.message, `#(${expression})`);
+  };
+  sendImageMessage(image) {
+    if (image.length > config.maxImageSize) {
+      return Message.warning('要发送的图片过大', 3);
+    }
+
+    const { user, focus } = this.props;
+    const ext = image.type
+      .split('/')
+      .pop()
+      .toLowerCase();
+    const url = URL.createObjectURL(image.result);
+
+    const img = new Image();
+    img.onload = () => {};
+    img.src = url;
+  }
+
+  handleSelectFile = async () => {
+    if (!this.props.connect) {
+      return Message.error('发送消息失败，您当前处于离线状态');
+    }
+    const image = await readDiskFile('blob', 'image/png,image/jpeg,image/gif');
+    if (!image) {
+      return;
+    }
+    this.sendImageMessage(image);
+  };
+  handleClickExpression = e => {
+    const $target = e.target;
+    if ($target.tagName === 'IMG') {
+      const url = Url.addParam($target.src, {
+        width: $target.naturalWidth,
+        height: $target.naturalHeight
+      });
+
+      const id = this.addSelfMessage('image', url);
+      this.sendMessage(id, 'image', url);
+      this.setState({
+        expressionSearchVisible: false
+      });
+    }
+  };
+  // 选择表情
+  expressionDropdown = (
+    <div className="expression-dropdown">
+      <Expression onSelect={this.handleSelectExpression} />
+    </div>
+  );
+
+  featureDropdown = <div className="feature-dropdown" />;
 
   render() {
     const {
@@ -137,10 +236,11 @@ class ChatInput extends Component {
     if (isLogin) {
       return (
         <div className="chat-chatInput">
-          {/*<Dropdown
+          <Dropdown
             trigger={['click']}
             visible={expressionVisible}
             onVisibleChange={this.handleVisibleChange}
+            overlay={this.expressionDropdown}
             animation="slide-up"
             placement="topLeft"
           >
@@ -151,7 +251,28 @@ class ChatInput extends Component {
               icon="expression"
               iconSize={32}
             />
-          </Dropdown>*/}
+          </Dropdown>
+          <Dropdown
+            trigger={['click']}
+            overlay={this.featureDropdown}
+            animation="slide-up"
+            placement="topLeft"
+          >
+            <IconButton className="feature" width={44} height={44} icon="feature" iconSize={32} />
+          </Dropdown>
+          <Dialog
+            className="codeEditor-dialog"
+            title="请输入要发送的代码"
+            visible={codeInputVisible}
+            onClose={this.handleCodeEditorClose}
+          >
+            <div className="container">
+              <CodeEditor ref={i => (this.codeEditor = i)} />
+              <button className="codeEditor-button" onClick={this.handleSendCode}>
+                发送
+              </button>
+            </div>
+          </Dialog>
           <input
             type="text"
             placeholder="代码会写了吗, 给加薪了吗, 股票涨了吗, 来吐槽一下吧~~"
