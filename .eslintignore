@@ -3,3 +3,12 @@ dist/
 static/
 .babelrc
 .eslintrc
+**/*.mp3
+**/*.css
+**/*.less
+**/*.scss
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.woff
