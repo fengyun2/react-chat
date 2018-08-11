@@ -4,12 +4,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import platform from 'platform';
+import 'normalize.css';
 
 import notification from './utils/notification';
 import App from './App';
 import store from './store/store';
 
-import 'normalize.css';
 import './style/iconfont.css';
 import './style/main.css';
 
@@ -17,8 +17,8 @@ let windowStatus = 'focus';
 window.onfocus = () => (windowStatus = 'focus');
 window.onblur = () => (windowStatus = 'blur');
 
-if (windowStatus === 'blur') {
-}
+// if (windowStatus === 'blur') {
+// }
 
 // function App() {
 //   return (
