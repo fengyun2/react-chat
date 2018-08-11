@@ -1,6 +1,7 @@
 node_modules/
 dist/
 static/
+server/
 .babelrc
 .eslintrc
 **/*.mp3

@@ -1,6 +1,6 @@
 export const BASE_API = 'https://cnodejs.org/api/v1';
 export default {
-  server: process.env.NODE_ENV === 'development' ? '//localhost:8005' : '',
+  server: process.env.NODE_ENV === 'development' ? '//localhost:9200' : '',
   maxImageSize: 1024 * 1024 * 3,
   maxBackgroundImageSize: 1024 * 1024 * 3,
 
