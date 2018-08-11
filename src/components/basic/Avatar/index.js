@@ -9,30 +9,30 @@ const failTimes = new Map();
 function noop() {}
 
 function handleError(e) {
-    const times = failTimes.get(e.target) || 0;
-    if (times >= 2) {
-        return;
-    }
-    e.target.src = avatarFallback;
-    failTimes.set(e.target, times + 1);
+  const times = failTimes.get(e.target) || 0;
+  if (times >= 2) {
+    return;
+  }
+  e.target.src = avatarFallback;
+  failTimes.set(e.target, times + 1);
 }
 
 const Avatar = ({ src, size = 60, onClick = noop, className = '' }) => (
-    <img
-        className={`component-avatar ${className}`}
-        src={src}
-        style={{ width: size, height: size, borderRadius: size / 2 }}
-        onClick={onClick}
-        onError={handleError}
-        alt=""
-    />
+  <img
+    className={`component-avatar ${className}`}
+    src={src}
+    style={{ width: size, height: size, borderRadius: size / 2 }}
+    onClick={onClick}
+    onError={handleError}
+    alt=""
+  />
 );
 
 Avatar.propTypes = {
-    src: PropTypes.string.isRequired,
-    size: PropTypes.number,
-    className: PropTypes.string,
-    onClick: PropTypes.func,
+  src: PropTypes.string.isRequired,
+  size: PropTypes.number,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Avatar;

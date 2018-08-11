@@ -4,6 +4,6 @@ import 'rc-progress/assets/index.css';
 import '../components.css';
 
 export default {
-    Line,
-    Circle,
+  Line,
+  Circle,
 };

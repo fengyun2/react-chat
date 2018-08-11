@@ -1,9 +1,9 @@
 import xss from 'xss';
 
 const myXss = new xss.FilterXSS({
-    whiteList: {},
+  whiteList: {},
 });
 
 export default function (text) {
-    return myXss.process(text);
+  return myXss.process(text);
 }

@@ -10,23 +10,23 @@ const pages = require('../config/pages');
 const htmlPlugins = pages.map(page => new HtmlWebpackPlugin(page));
 
 Object.keys(baseWebpackConfig.entry).forEach((name) => {
-    baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name]);
-    // baseWebpackConfig.entry[name] = ['react-hot-loader/patch', './build/dev-client'].concat(baseWebpackConfig.entry[name]);
+  baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name]);
+  // baseWebpackConfig.entry[name] = ['react-hot-loader/patch', './build/dev-client'].concat(baseWebpackConfig.entry[name]);
 });
 
 module.exports = merge(baseWebpackConfig, {
-    mode: 'development',
-    module: {
-        rules: utils.getStyleLoaders(),
-    },
-    devtool: '#cheap-module-eval-source-map',
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': config.dev.env,
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new FriendlyErrorsPlugin(),
-        ...htmlPlugins,
-    ],
+  mode: 'development',
+  module: {
+    rules: utils.getStyleLoaders(),
+  },
+  devtool: '#cheap-module-eval-source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': config.dev.env,
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new FriendlyErrorsPlugin(),
+    ...htmlPlugins,
+  ],
 });

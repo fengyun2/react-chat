@@ -7,14 +7,14 @@ import './FeatureLinkmans.css';
 
 class FeatureLinkmans extends Component {
   static propTypes = {
-      isLogin: PropTypes.bool.isRequired,
+    isLogin: PropTypes.bool.isRequired,
   };
   render() {
-      const { isLogin } = this.props;
-      return <div className="module-main-feature">{isLogin ? <Feature /> : null}</div>;
+    const { isLogin } = this.props;
+    return <div className="module-main-feature">{isLogin ? <Feature /> : null}</div>;
   }
 }
 
 export default connect(state => ({
-    isLogin: !!state.getIn(['user', '_id']),
+  isLogin: !!state.getIn(['user', '_id']),
 }))(FeatureLinkmans);

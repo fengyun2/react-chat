@@ -6,7 +6,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import action from '@/store/action';
 import config from '@/config';
-import socket from '@/socket'
+import socket from '@/socket';
 import xss from '@/utils/xss';
 import Url from '@/utils/url';
 import IconButton from '@/components/basic/IconButton';
@@ -18,11 +18,11 @@ import Input from '@/components/basic/Input';
 import Button from '@/components/basic/Button';
 import Loading from '@/components/basic/Loading';
 
-import Expression from './Expression';
-import CodeEditor from './CodeEditor';
 import readDiskFile from '@/utils/readDiskFile';
 import getRandomHuaji from '@/utils/getRandomHuaji';
-import fetch from "@/utils/fetch";
+import fetch from '@/utils/fetch';
+import Expression from './Expression';
+import CodeEditor from './CodeEditor';
 
 class ChatInput extends Component {
   static handleLogin() {
@@ -209,7 +209,7 @@ class ChatInput extends Component {
     this.sendMessage(id, 'image', huaji);
   }
   searchExpression = async (keywords) => {
-    console.log('你正在搜索表情包')
+    console.log('你正在搜索表情包');
     if (keywords) {
       this.setState({
         expressionSearchLoading: true,
@@ -320,7 +320,7 @@ class ChatInput extends Component {
               </div>
               <div className="expression-list" onClick={this.handleClickExpression}>
                 {expressionSearchResults.map((image, index) => (
-                  <img src={image} key={i + image} />
+                  <img src={image} key={index + image} />
                 ))}
               </div>
             </div>
