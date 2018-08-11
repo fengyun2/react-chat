@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Tabs, TabPane, TabContent, ScrollableInkTabBar } from '../../../components/basic/Tabs';
-import expressions from '../../../utils/expressions';
+import { Tabs, TabPane, TabContent, ScrollableInkTabBar } from '@/components/basic/Tabs';
+import expressions from '@/utils/expressions';
 
-const baidu = require('../../../assets/images/baidu.png');
+const baidu = require('@/assets/images/baidu.png');
 
 console.log('expressions: ', expressions);
 
 class Expression extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
-  };
+  }
   handleClick = (e) => {
     const { name } = e.currentTarget.dataset;
     const { onSelect } = this.props;
     if (onSelect) {
       onSelect(name);
     }
-  };
+  }
   renderDefaultExpression = () => (
     <div className="default-expression">
       {expressions.default.map((e, index) => (
@@ -26,14 +26,14 @@ class Expression extends Component {
           <div
             className="image"
             style={{
-                          backgroundPosition: `left ${-30 * index}px`,
-                          backgroundImage: `url(${baidu})`,
-                      }}
+              backgroundPosition: `left ${-30 * index}px`,
+              backgroundImage: `url(${baidu})`,
+            }}
           />
         </div>
-          ))}
+      ))}
     </div>
-  );
+  )
 
   render() {
     return (

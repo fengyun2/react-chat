@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Select, Option } from '../../../components/basic/Select';
+import { Select, Option } from '@/components/basic/Select';
 
 const languages = [
   'javascript',

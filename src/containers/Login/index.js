@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import platform from 'platform';
 
-import { Tabs, TabPane, TabContent, ScrollableInkTabBar } from '../../components/basic/Tabs';
-import Input from '../../components/basic/Input';
-import Message from '../../components/basic/Message';
+import { Tabs, TabPane, TabContent, ScrollableInkTabBar } from '@/components/basic/Tabs';
+import Input from '@/components/basic/Input';
+import Message from '@/components/basic/Message';
 
-import action from '../../store/action';
+import action from '@/store/action';
 
 import './login.css';
 
@@ -40,7 +40,7 @@ class Login extends Component {
     action.closeLoginDialog();
     window.localStorage.setItem('token', '123');
     Message.success('登录成功');
-  };
+  }
   handleRegister = () => {
     const registerInfo = {
       username: this.registerUsername.getValue(),
@@ -71,7 +71,7 @@ class Login extends Component {
     action.setUser(user);
     action.closeLoginDialog();
     window.localStorage.setItem('token', '123');
-  };
+  }
   renderLogin() {
     return (
       <div className="pane">
@@ -94,11 +94,7 @@ class Login extends Component {
           placeholder="用户名即昵称，请慎重，不可修改"
         />
         <h3>密码</h3>
-        <Input
-          ref={i => (this.registerPassword = i)}
-          onEnter={this.handleRegister}
-          placeholder="暂也不支持修改"
-        />
+        <Input ref={i => (this.registerPassword = i)} onEnter={this.handleRegister} placeholder="暂也不支持修改" />
         <button onClick={this.handleRegister}>注册</button>
       </div>
     );

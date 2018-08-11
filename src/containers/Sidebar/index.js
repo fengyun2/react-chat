@@ -8,15 +8,15 @@ import Switch from 'react-switch';
 import ReactLoading from 'react-loading';
 
 // import self components
-import Avatar from '../../components/basic/Avatar';
-import IconButton from '../../components/basic/IconButton';
-import Dialog from '../../components/basic/Dialog';
-import Button from '../../components/basic/Button';
-import Message from '../../components/basic/Message';
-import Input from '../../components/basic/Input';
+import Avatar from '@/components/basic/Avatar';
+import IconButton from '@/components/basic/IconButton';
+import Dialog from '@/components/basic/Dialog';
+import Button from '@/components/basic/Button';
+import Message from '@/components/basic/Message';
+import Input from '@/components/basic/Input';
 
-import setCssVariable from '../../utils/setCssVariable';
-import config from '../../config';
+import setCssVariable from '@/utils/setCssVariable';
+import config from '@/config';
 
 import './index.css';
 

@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import immutable from 'immutable';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import IconButton from '../../../components/basic/IconButton';
-import Message from '../../../components/basic/Message';
+import IconButton from '@/components/basic/IconButton';
+import Message from '@/components/basic/Message';
 
 class HeaderBar extends Component {
   static handleShareGroup() {
@@ -16,7 +16,7 @@ class HeaderBar extends Component {
     linkman: ImmutablePropTypes.map,
     onShowInfo: PropTypes.func,
     isLogin: PropTypes.bool.isRequired,
-  };
+  }
   render() {
     const { linkman, onShowInfo, isLogin } = this.props;
     if (!linkman) {
@@ -30,18 +30,12 @@ class HeaderBar extends Component {
           <div>
             {linkman.get('type') === 'group' ? (
               <CopyToClipboard text={`invite::${linkman.get('name')}`}>
-                <IconButton
-                  width={40}
-                  height={40}
-                  icon="share"
-                  iconSize={24}
-                  onClick={HeaderBar.handleShareGroup}
-                />
+                <IconButton width={40} height={40} icon="share" iconSize={24} onClick={HeaderBar.handleShareGroup} />
               </CopyToClipboard>
-                      ) : null}
+            ) : null}
             <IconButton width={40} height={40} icon="gongneng" iconSize={24} onClick={onShowInfo} />
           </div>
-              ) : null}
+        ) : null}
       </div>
     );
   }

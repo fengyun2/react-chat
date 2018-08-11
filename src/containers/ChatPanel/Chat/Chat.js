@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import immutable from 'immutable';
 
-import config from '../../../config';
-import action from '../../../store/action';
-import Avatar from '../../../components/basic/Avatar';
-import Tooltip from '../../../components/basic/Tooltip';
-import Message from '../../../components/basic/Message';
-import Button from '../../../components/basic/Button';
+import config from '@/config';
+import action from '@/store/action';
+import Avatar from '@/components/basic/Avatar';
+import Tooltip from '@/components/basic/Tooltip';
+import Message from '@/components/basic/Message';
+import Button from '@/components/basic/Button';
 import HeaderBar from './HeaderBar';
+import MessageList from './MessageList';
 import ChatInput from './ChatInput';
 
 import './Chat.css';
@@ -91,6 +92,7 @@ class Chat extends Component {
                           : this.showUserInfoDialog.bind(this, { _id: to, username: name, avatar })
                   }
         />
+        <MessageList showUserInfoDialog={this.showUserInfoDialog} />
         <ChatInput />
       </div>
     );
