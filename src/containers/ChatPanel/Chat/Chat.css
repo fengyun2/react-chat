@@ -108,7 +108,7 @@
   height: 30px;
   background-repeat: no-repeat;
   background-size: 30px auto;
-  background-image: url('../../../../assets/images/baidu.png');
+  background-image: url('../../../assets/images/baidu.png');
 }
 .chat-expression .rc-tabs {
   height: 100%;
