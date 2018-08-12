@@ -5,6 +5,7 @@ import { Tabs, TabPane, TabContent, ScrollableInkTabBar } from '@/components/bas
 import Input from '@/components/basic/Input';
 import Message from '@/components/basic/Message';
 
+import socket from '@/socket';
 import action from '@/store/action';
 
 import './login.css';
@@ -36,10 +37,19 @@ class Login extends Component {
         },
       ],
     };
-    action.setUser(user);
-    action.closeLoginDialog();
-    window.localStorage.setItem('token', '123');
-    Message.success('登录成功');
+
+    socket.emit('login', loginInfo, (res) => {
+      console.log('login - info: ', res);
+
+      if (typeof res === 'string') {
+        Message.error(res);
+      } else {
+        action.setUser(res);
+        action.closeLoginDialog();
+        window.localStorage.setItem('token', res.token);
+        Message.success('登录成功');
+      }
+    });
   }
   handleRegister = () => {
     const registerInfo = {
@@ -67,10 +77,16 @@ class Login extends Component {
         },
       ],
     };
-    Message.success('创建成功');
-    action.setUser(user);
-    action.closeLoginDialog();
-    window.localStorage.setItem('token', '123');
+    socket.emit('register', registerInfo, (res) => {
+      if (typeof res === 'string') {
+        Message.error(res);
+      } else {
+        Message.success('创建成功');
+        action.setUser(res);
+        action.closeLoginDialog();
+        window.localStorage.setItem('token', res.token);
+      }
+    });
   }
   renderLogin() {
     return (

@@ -12,6 +12,7 @@ module.exports = function () {
   };
 
   return async (ctx, next) => {
+    console.log('isLogin ====> ', ctx.data)
     if (!noUseLoginEvent[ctx.event] && !ctx.socket.user) {
       ctx.res = '请登录后再试';
       return;
