@@ -15,7 +15,7 @@ import HeaderBar from './HeaderBar';
 import MessageList from './MessageList';
 import ChatInput from './ChatInput';
 
-import './Chat.css';
+import './Chat.less';
 
 class Chat extends Component {
   static propTypes = {
