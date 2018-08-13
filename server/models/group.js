@@ -26,10 +26,12 @@ const GroupSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  members: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
+  members: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    }
+  ]
 });
 
 const Group = mongoose.model('Group', GroupSchema);

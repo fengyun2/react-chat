@@ -94,7 +94,7 @@ class Login extends Component {
         <h3>用户名</h3>
         <Input ref={i => (this.loginUsername = i)} onEnter={this.handleLogin} />
         <h3>密码</h3>
-        <Input ref={i => (this.loginPassword = i)} type="password" onEnter={this.handleLogin} />
+        <Input type="password" ref={i => (this.loginPassword = i)} onEnter={this.handleLogin} />
         <button onClick={this.handleLogin}>登录</button>
       </div>
     );
@@ -110,7 +110,12 @@ class Login extends Component {
           placeholder="用户名即昵称，请慎重，不可修改"
         />
         <h3>密码</h3>
-        <Input ref={i => (this.registerPassword = i)} onEnter={this.handleRegister} placeholder="暂也不支持修改" />
+        <Input
+          type="password"
+          ref={i => (this.registerPassword = i)}
+          onEnter={this.handleRegister}
+          placeholder="暂也不支持修改"
+        />
         <button onClick={this.handleRegister}>注册</button>
       </div>
     );

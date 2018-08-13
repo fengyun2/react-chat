@@ -121,7 +121,7 @@ class ChatInput extends Component {
   }
   addSelfMessage(type, content) {
     const { user, focus } = this.props;
-    console.log('addSelfMessage ===> ', user, focus)
+    console.log('addSelfMessage ===> ', user, focus);
     const _id = focus + Date.now();
     const message = {
       _id,
@@ -138,7 +138,7 @@ class ChatInput extends Component {
     if (type === 'image') {
       message.percent = 0;
     }
-    action.addLinkmanMessage(focus, message)
+    action.addLinkmanMessage(focus, message);
     return _id;
   }
   handleSendCode = () => {
@@ -173,13 +173,13 @@ class ChatInput extends Component {
     const [err, res] = await fetch('sendMessage', {
       to: focus,
       type,
-      content
-    })
+      content,
+    });
     if (err) {
-      action.deleteSelfMessage(focus, localId)
+      action.deleteSelfMessage(focus, localId);
     } else {
-      res.loading = false
-      action.updateSelfMessage(focus, localId, res)
+      res.loading = false;
+      action.updateSelfMessage(focus, localId, res);
     }
     // Message.success('发送消息成功');
   }

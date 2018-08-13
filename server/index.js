@@ -29,7 +29,7 @@ mongoose.connect(
     const group = await Group.findOne({ isDefault: true });
     if (!group) {
       const defaultGroup = await Group.create({
-        name: 'react-chat',
+        name: 'HTML5前端精英群',
         avatar: getRandomAvatar(),
         announcement: '欢迎光临react-chat, 这是一个开源/自由的聊天室',
         isDefault: true,
