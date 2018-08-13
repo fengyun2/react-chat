@@ -159,6 +159,46 @@ function reducer(state = initialState, action) {
             .set('unread', 0))
         .set('focus', action.linkmanId);
     }
+    case 'AddLinkmanMessage': {
+      const linkmanIndex = state.getIn(['user', 'linkmans']).findIndex(l => l.get('_id') === action.linkmanId)
+      const linkman = state.getIn(['user', 'linkmans', linkmanIndex])
+      let unread = 0
+      if (state.get('focus') !== linkman.get('_id')) {
+        unread = linkman.get('unread') + 1
+      }
+      return state.updateIn(['user', 'linkmans'], linkmans => (
+        linkmans.delete(linkmanIndex).unshift(linkman.update('messages', messages => {
+          const newMessages = messages.push(immutable.fromJS(action.message))
+          if (action.message.from === state.getIn(['user', '_id']) && newMessages.size > 300) {
+            return newMessages.splice(0, 200)
+          }
+          return newMessages
+        })
+        .set('unread', unread))
+      ))
+    }
+    case 'AddLinkmanMessages': {
+      const linkmanIndex = state.getIn(['user', 'linkmans']).findIndex( l => l.get('_id') === action.linkmanId)
+      return state.updateIn(['user', 'linkmans', linkmanIndex], l => (
+        l.update('messages', messages => (
+          immutable.fromJS(action.messages).concat(messages)
+        ))
+      ))
+    }
+    case 'UpdateSelfMessage': {
+      const linkmanIndex = state.getIn(['user', 'linkmans']).findIndex(l => l.get('_id') === action.linkmanId)
+      return state.updateIn(['user', 'linkmans', linkmanIndex, 'messages'], messages => {
+        const messageIndex = messages.findLastIndex(m => m.get('_id') === action.messageId)
+        return messages.update(messageIndex, message => message.mergeDeep(immutable.fromJS(action.message)))
+      })
+    }
+    case 'DeleteSelfMessage': {
+      const linkmanIndex = state.getIn(['user', 'linkmans']).findIndex(l => l.get('_id') === action.linkmanId)
+      return state.updateIn(['user', 'linkmans', linkmanIndex, 'messages'], messages => {
+        const messageIndex = messages.findLastIndex(m => m.get('_id') === action.messageId)
+        return messages.delete(messageIndex)
+      })
+    }
     default: {
       return state;
     }

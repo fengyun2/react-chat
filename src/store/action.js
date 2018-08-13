@@ -44,11 +44,54 @@ function logout() {
     type: 'Logout',
   });
 }
-
+/**
+ * 设置头像
+ * @param {String} avatar
+ */
 function setAvatar(avatar) {
   dispatch({
     type: 'SetAvatar',
     avatar,
+  });
+}
+function addLinkmanMessage(linkmanId, message) {
+  dispatch({
+    type: 'AddLinkmanMessage',
+    linkmanId,
+    message,
+  });
+}
+function addLinkmanMessages(linkmanId, messages) {
+  dispatch({
+    type: 'AddLinkmanMessages',
+    linkmanId,
+    messages,
+  });
+}
+/**
+ * 更新自己的临时消息
+ * @param {String} linkmanId 联系人id
+ * @param {String} messageId 临时消息id
+ * @param {String} message 消息内容
+ */
+function updateSelfMessage(linkmanId, messageId, message) {
+  dispatch({
+    type: 'UpdateSelfMessage',
+    linkmanId,
+    messageId,
+    message,
+  });
+}
+/**
+ * 删除自己的临时消息
+ * @param {String} linkmanId 联系人id
+ * @param {String} messageId 临时消息id
+ */
+function deleteSelfMessage(linkmanId, messageId) {
+  dispatch({
+    type: 'DeleteSelfMessage',
+    linkmanId,
+    messageId,
   });
 }
 
@@ -118,6 +161,11 @@ export default {
   logout,
   setAvatar,
   setFocus,
+
+  addLinkmanMessage,
+  addLinkmanMessages,
+  updateSelfMessage,
+  deleteSelfMessage,
 
   showLoginDialog,
   closeLoginDialog,
