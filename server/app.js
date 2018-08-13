@@ -15,6 +15,7 @@ const route = require('./middlewares/route');
 // routes
 const userRoutes = require('./routes/user');
 const groupRoutes = require('./routes/group');
+const messageRoutes = require('./routes/message');
 
 // models
 const Socket = require('./models/socket');
@@ -54,7 +55,7 @@ if (process.env.NODE_ENV === 'production' && config.allowOrigin) {
 io.use(enhanceContext());
 io.use(catchError());
 io.use(isLogin());
-io.use(route(app.io, app._io, Object.assign({}, userRoutes, groupRoutes)));
+io.use(route(app.io, app._io, Object.assign({}, userRoutes, groupRoutes, messageRoutes)));
 
 app.io.on('connection', async (ctx) => {
   console.log(`  <<<< connection ${ctx.socket.id} ${ctx.socket.request.connection.remoteAddress}`);
