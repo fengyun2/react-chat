@@ -75,8 +75,12 @@ class ChatInput extends Component {
       expressionSearchVisible: false,
       expressionSearchLoading: false,
       expressionSearchResults: [],
+
+      at: false, // 是否处于@输入中
+      atContent: '', // @内容
     };
     this.lockEnter = false;
+    this.ime = false;
   }
   handleVisibleChange = (visible) => {
     this.setState({
@@ -156,6 +160,35 @@ class ChatInput extends Component {
     this.sendMessage(id, 'code', code);
     this.handleCodeEditorClose();
   }
+  handleInputKeyDown = async (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+    } else if (e.key === 'Enter' && !this.ime) {
+      this.sendTextMessage();
+    } else if (e.altKey && (e.key === 's' || e.key === 'ß')) {
+      this.sendHuaji();
+      e.preventDefault();
+    } else if (e.altKey && (e.key === 'd' || e.key === '∂')) {
+      this.setState({
+        expressionSearchVisible: true,
+      });
+    } else if (e.key === '@') { // 如果按下@键，则进入计算模式
+      if (!/@/.test(this.message.value)) {
+        this.setState({
+          at: true,
+          atContent: '',
+        });
+
+        const { focus } = this.props;
+        const [err, result] = await fetch('getGroupOnlineMembers', {
+          groupId: focus,
+        });
+        if (!err) {
+          action.setGroupMembers(focus, result);
+        }
+      }
+    }
+  }
   sendTextMessage = () => {
     if (!this.props.connect) {
       return Message.error('发送消息失败，您当前处于离线状态');
@@ -164,9 +197,18 @@ class ChatInput extends Component {
     if (message.length === 0) {
       return;
     }
-    // TODO:
-    const id = this.addSelfMessage('text', xss(message));
-    this.sendMessage(id, 'text', message);
+    if (/^invite::/.test(message)) {
+      const groupName = message.replace('invite::', '');
+      const id = this.addSelfMessage('invite', JSON.stringify({
+        inviter: this.props.user.get('username'),
+        groupId: '',
+        groupName,
+      }));
+      this.sendMessage(id, 'invite', groupName);
+    } else {
+      const id = this.addSelfMessage('text', xss(message));
+      this.sendMessage(id, 'text', message);
+    }
   }
   async sendMessage(localId, type, content) {
     const { focus } = this.props;
@@ -213,6 +255,20 @@ class ChatInput extends Component {
       return;
     }
     this.sendImageMessage(image);
+  }
+
+  handlePaste = (e) => {
+    if (!this.props.connect) {
+      e.preventDefault();
+      return Message.error('发送消息失败，您当前处于离线状态');
+    }
+    const { items, types } = (e.clipboardData || e.originalEvent.clipboardData);
+
+    // TODO:
+    // 如果包含文件内容
+    if (types.index('Files' > -1)) {
+
+    }
   }
 
   sendHuaji = async () => {
@@ -342,6 +398,9 @@ class ChatInput extends Component {
             type="text"
             placeholder="代码会写了吗, 给加薪了吗, 股票涨了吗, 来吐槽一下吧~~"
             maxLength="2048"
+            autoFocus="true"
+            onKeyDown={this.handleInputKeyDown}
+            onPaste={this.handlePaste}
             ref={i => (this.message = i)}
           />
           <IconButton
