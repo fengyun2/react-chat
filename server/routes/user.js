@@ -229,9 +229,9 @@ module.exports = {
     ctx.socket.socket.join(group._id);
     const messages = await Message.find(
       { to: group._id },
-      { type: 1, content: 1, from: 1, createTime },
+      { type: 1, content: 1, from: 1, createTime: 1 },
       { sort: { createTime: -1 }, limit: 15 },
-    );
+    ).populate('from', {username: 1, avatar: 1})
     messages.reverse();
 
     return Object.assign({ messages }, group.toObject());

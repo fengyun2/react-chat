@@ -1,3 +1,4 @@
+import fetch from '@/utils/fetch';
 import store from './store';
 
 const { dispatch } = store;
@@ -37,8 +38,40 @@ async function setUser(user) {
       isAdmin,
     },
   });
-}
 
+  connect();
+
+  const linkmanIds = [...user.groups.map(g => g._id), ...user.friends.map(f => f._id)];
+  const [err, messages] = await fetch('getLinkmansLastMessages', {
+    linkmans: linkmanIds,
+  });
+  if (!err) {
+    dispatch({
+      type: 'SetLinkmanMessages',
+      messages,
+    });
+  }
+}
+async function setGuest(defaultGroup) {
+  // defaultGroup.messages.forEach(m => con)
+}
+function connect() {
+  dispatch({
+    type: 'SetDeepValue',
+    keys: ['connect'],
+    value: true,
+  });
+}
+function disconnect() {
+  dispatch({
+    type: 'SetDeepValue',
+    keys: ['connect'],
+    value: false,
+  });
+}
+/**
+ * 退出登录
+ */
 function logout() {
   dispatch({
     type: 'Logout',
@@ -155,11 +188,40 @@ function setSound(sound) {
   });
   window.localStorage.setItem('sound', sound);
 }
+function setSoundSwitch(value) {
+  dispatch({
+    type: 'SetDeepValue',
+    keys: ['ui', 'soundSwitch'],
+    value,
+  });
+  window.localStorage.setItem('soundSwitch', value);
+}
+function setNotificationSwitch(value) {
+  dispatch({
+    type: 'SetDeepValue',
+    keys: ['ui', 'notificationSwitch'],
+    value,
+  });
+  window.localStorage.setItem('notificationSwitch', value);
+}
+
+function setVoiceSwitch(value) {
+  dispatch({
+    type: 'SetDeepValue',
+    keys: ['ui', 'voiceSwitch'],
+    value,
+  });
+  window.localStorage.setItem('voiceSwitch', value);
+}
 
 export default {
   setUser,
+  setGuest,
+  connect,
+  disconnect,
   logout,
   setAvatar,
+
   setFocus,
 
   addLinkmanMessage,
@@ -173,4 +235,7 @@ export default {
   setPrimaryTextColor,
   setBackgroundImage,
   setSound,
+  setSoundSwitch,
+  setNotificationSwitch,
+  setVoiceSwitch,
 };

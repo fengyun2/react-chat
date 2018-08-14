@@ -15,6 +15,8 @@ import Button from '@/components/basic/Button';
 import Message from '@/components/basic/Message';
 import Input from '@/components/basic/Input';
 
+import action from "@/store/action";
+import socket from '@/socket'
 import setCssVariable from '@/utils/setCssVariable';
 import config from '@/config';
 
@@ -22,13 +24,24 @@ import './index.css';
 
 class Sidebar extends Component {
   static logout() {
+    action.logout()
     window.localStorage.removeItem('token');
     Message.success('您已经退出登录');
+    socket.disconnect()
+    socket.connect()
   }
   static resetThume() {
+    action.setPrimaryColor(config.primaryColor)
+    action.setPrimaryTextColor(config.primaryTextColor)
+    action.setBackgroundImage(config.backgroundImage)
+    setCssVariable(config.primaryColor, config.primaryTextColor)
+    window.localStorage.removeItem('primaryColor')
+    window.localStorage.removeItem('primaryTextColor')
+    window.localStorage.removeItem('backgroundImage')
     Message.success('已恢复默认主题');
   }
   static resetSound() {
+    action.setSound(config.sound)
     window.localStorage.removeItem('sound');
     Message.success('已恢复默认提示音');
   }
@@ -59,15 +72,25 @@ class Sidebar extends Component {
       adminDialog: false,
     };
   }
-  openSettingDialog() {
+  openSettingDialog = () => {
     this.setState({
       settingDialog: true,
     });
   }
-  closeSettingDialog() {
+  closeSettingDialog = () => {
     this.setState({
       settingDialog: true,
     });
+  }
+  openUserDialog = () => {
+    this.setState({
+      userDialog: true
+    })
+  }
+  closeUserDialog = () => {
+    this.setState({
+      userDialog: false
+    })
   }
   render() {
     const {
@@ -97,15 +120,50 @@ class Sidebar extends Component {
     if (isLogin) {
       return (
         <div className="module-main-sidebar">
-          <Avatar className="avatar" src={avatar} />
+          <Avatar className="avatar" src={avatar} onClick={this.openUserDialog} />
           <div className="buttons">
             {isAdmin ? (
               <IconButton width={40} height={40} icon="administrator" iconSize={28} />
                       ) : null}
             <IconButton width={40} height={40} icon="about" iconSize={26} />
-            <IconButton width={40} height={40} icon="setting" iconSize={26} />
-            <IconButton width={40} height={40} icon="logout" iconSize={26} />
+            <IconButton width={40} height={40} icon="setting" iconSize={26} onClick={this.openSettingDialog}/>
+            <IconButton width={40} height={40} icon="logout" iconSize={26} onClick={Sidebar.logout} />
           </div>
+          <Dialog className="dialog system-setting" visible={settingDialog} title="系统设置" onClose={this.closeSettingDialog}>
+            <div className="content">
+              <div>
+                <p>恢复</p>
+                <div className="buttons">
+                  <Button onClick={() => {}}>恢复默认主题</Button>
+                  <Button onClick={() => {}}>恢复默认提示音</Button>
+                </div>
+              </div>
+              <div>
+                <p>开关</p>
+                <div className="switch">
+                  <p>声音提醒</p>
+                  <Switch onChange={action.setSoundSwitch} checked={soundSwitch}></Switch>
+                  <p>桌面提醒</p>
+                  <Switch onChange={action.setNotificationSwitch} checked={notificationSwitch}></Switch>
+                  <p>语音播报</p>
+                  <Switch onChange={action.setVoiceSwitch} checked={voiceSwitch}></Switch>
+                </div>
+              </div>
+              <div>
+                <p>提示音</p>
+                <div className="sounds">
+                  <RadioGroup value={sound} onChange={() => {}} horizontal>
+                    <RadioButton value="default">默认</RadioButton>
+                    <RadioButton value="apple">苹果</RadioButton>
+                    <RadioButton value="pcqq">电脑QQ</RadioButton>
+                    <RadioButton value="mobileqq">手机QQ</RadioButton>
+                    <RadioButton value="momo">陌陌</RadioButton>
+                    <RadioButton value="huaji">滑稽</RadioButton>
+                  </RadioGroup>
+                </div>
+              </div>
+            </div>
+          </Dialog>
         </div>
       );
     }
