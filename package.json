@@ -46,7 +46,7 @@
     "querystring": "0.2.0",
     "rc-dialog": "7.2.0",
     "rc-dropdown": "2.2.0",
-    "rc-menu": "latest",
+    "rc-menu": "7.5.5",
     "rc-notification": "3.2.0",
     "rc-progress": "2.2.5",
     "rc-select": "8.1.1",
